@@ -1,27 +1,36 @@
+// frontend/src/router/index.js
+
 import { createRouter, createWebHistory } from 'vue-router'
-import LoginForm from '../components/LoginForm.vue'
-import ListManagement from '../components/ListManagement.vue'
+import Login from '../views/Login.vue'
+import ListManagement from '../views/ListManagement.vue'
 
 const routes = [
   {
     path: '/',
-    redirect: '/login'
-  },
-  {
-    path: '/login',
     name: 'Login',
-    component: LoginForm
+    component: Login
   },
   {
     path: '/lists',
     name: 'ListManagement',
-    component: ListManagement
+    component: ListManagement,
+    meta: { requiresAuth: true }
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const loggedIn = !!localStorage.getItem('token')
+
+  if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
+    next('/')
+  } else {
+    next()
+  }
 })
 
 export default router
