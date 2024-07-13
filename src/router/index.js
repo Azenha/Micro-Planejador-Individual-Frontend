@@ -3,23 +3,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../views/Login.vue'
 import ListManagement from '../views/ListManagement.vue'
+import ItemManagement from '../views/ItemManagement.vue'
 
 const routes = [
-  {
-    path: '/',
-    name: 'Login',
-    component: Login
-  },
-  {
-    path: '/lists',
-    name: 'ListManagement',
-    component: ListManagement,
-    meta: { requiresAuth: true }
-  }
+  { path: '/', name: 'Login', component: Login },
+  { path: '/lists', name: 'ListManagement', component: ListManagement },
+  { path: '/lists/:listId', name: 'ItemManagement', component: ItemManagement }
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
 
