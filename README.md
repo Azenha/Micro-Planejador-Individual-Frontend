@@ -1,4 +1,4 @@
-# Micro Planejador Individual Backend
+# Micro Planejador Individual Frontend
 
 Uma ferramenta de planejamento de compras para MEIs
 

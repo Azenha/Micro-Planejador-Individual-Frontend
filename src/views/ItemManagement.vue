@@ -1,38 +1,38 @@
 <!-- frontend/src/views/ItemManagement.vue -->
 <template>
   <div>
-    <h2 class="text-center text-2xl font-bold mb-4">Item Management for {{ listName }}</h2>
+    <h2 class="text-center text-2xl font-bold mb-4">{{ listName }}</h2>
     <form @submit.prevent="createItem" class="max-w-md mx-auto bg-white p-8 rounded shadow-md mb-4">
       <div class="mb-4">
-        <label class="block text-gray-700">Item Name</label>
+        <label class="block text-gray-700">Item</label>
         <input v-model="itemName" type="text" class="w-full p-2 border rounded" required />
       </div>
       <div class="mb-4">
-        <label class="block text-gray-700">Quantity</label>
+        <label class="block text-gray-700">Quantidade</label>
         <input v-model="quantity" type="number" class="w-full p-2 border rounded" />
       </div>
       <div class="mb-4">
-        <label class="block text-gray-700">Unit</label>
+        <label class="block text-gray-700">Unidade</label>
         <input v-model="unit" type="text" class="w-full p-2 border rounded" />
       </div>
       <div class="mb-4">
-        <label class="block text-gray-700">Value</label>
+        <label class="block text-gray-700">Valor</label>
         <input v-model="value" type="number" step="0.01" class="w-full p-2 border rounded" />
       </div>
-      <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Add Item</button>
+      <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Adicionar novo item</button>
     </form>
-    <h3 class="text-center text-xl font-bold mb-2">Items in {{ listName }}</h3>
+    <h3 class="text-center text-xl font-bold mb-2">{{ listName }}</h3>
     <table class="w-3/5 mx-auto bg-white border rounded">
       <thead>
         <tr>
           <th class="border px-4 py-2">
               <ShoppingCartIcon class="h-5 w-5 inline-block" />
             </th>
-          <th class="border px-4 py-2">Name</th>
-          <th class="border px-4 py-2">Quantity</th>
-          <th class="border px-4 py-2">Unit</th>
-          <th class="border px-4 py-2">Value</th>
-          <th class="border px-4 py-2">Actions</th>
+          <th class="border px-4 py-2">Nome</th>
+          <th class="border px-4 py-2">Quantidade</th>
+          <th class="border px-4 py-2">Unidade</th>
+          <th class="border px-4 py-2">Valor</th>
+          <th class="border px-4 py-2">Ações</th>
         </tr>
       </thead>
       <tbody>
@@ -55,33 +55,33 @@
     <!-- Back Button -->
 <div class="max-w-4xl mx-auto mt-4 flex justify-center">
   <button @click="goBack" class="bg-gray-500 text-white px-4 py-2 rounded mx-auto flex items-center">
-    <ArrowUturnLeftIcon class="h-5 w-5 inline-block mr-2" /> Back
+    <ArrowUturnLeftIcon class="h-5 w-5 inline-block mr-2" /> Voltar
   </button>
 </div>
 
     <!-- Edit Item Modal -->
     <div v-if="showEditModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center">
       <div class="bg-white p-8 rounded shadow-md">
-        <h3 class="text-xl font-bold mb-4">Edit Item</h3>
+        <h3 class="text-xl font-bold mb-4">Editar item</h3>
         <form @submit.prevent="updateItem">
           <div class="mb-4">
-            <label class="block text-gray-700">Item Name</label>
+            <label class="block text-gray-700">Nome</label>
             <input v-model="editItemName" type="text" class="w-full p-2 border rounded" required />
           </div>
           <div class="mb-4">
-            <label class="block text-gray-700">Quantity</label>
+            <label class="block text-gray-700">Quantidade</label>
             <input v-model="editQuantity" type="number" class="w-full p-2 border rounded" />
           </div>
           <div class="mb-4">
-            <label class="block text-gray-700">Unit</label>
+            <label class="block text-gray-700">Unidade</label>
             <input v-model="editUnit" type="text" class="w-full p-2 border rounded" />
           </div>
           <div class="mb-4">
-            <label class="block text-gray-700">Value</label>
+            <label class="block text-gray-700">Valor</label>
             <input v-model="editValue" type="number" step="0.01" class="w-full p-2 border rounded" />
           </div>
-          <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Update Item</button>
-          <button @click="showEditModal = false" class="w-full bg-gray-500 text-white p-2 rounded mt-2">Cancel</button>
+          <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Atualizar</button>
+          <button @click="showEditModal = false" class="w-full bg-gray-500 text-white p-2 rounded mt-2">Cancelar</button>
         </form>
       </div>
     </div>
@@ -89,9 +89,9 @@
     <!-- Delete Confirmation Modal -->
     <div v-if="showDeleteModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center">
       <div class="bg-white p-8 rounded shadow-md">
-        <h3 class="text-xl font-bold mb-4">Are you sure you want to delete this item?</h3>
-        <button @click="deleteItem" class="w-full bg-red-500 text-white p-2 rounded">Delete</button>
-        <button @click="showDeleteModal = false" class="w-full bg-gray-500 text-white p-2 rounded mt-2">Cancel</button>
+        <h3 class="text-xl font-bold mb-4">Você deseja excluir este item?</h3>
+        <button @click="deleteItem" class="w-full bg-red-500 text-white p-2 rounded">Excluir</button>
+        <button @click="showDeleteModal = false" class="w-full bg-gray-500 text-white p-2 rounded mt-2">Cancelar</button>
       </div>
     </div>
   </div>

@@ -1,20 +1,20 @@
 <!-- frontend/src/views/ListManagement.vue -->
 <template>
   <div>
-    <h2 class="text-center text-2xl font-bold mb-4">List Management</h2>
+    <h2 class="text-center text-2xl font-bold mb-4">Gerir listas</h2>
     <form @submit.prevent="createList" class="max-w-md mx-auto bg-white p-8 rounded shadow-md mb-4">
       <div class="mb-4">
-        <label class="block text-gray-700">List Name</label>
+        <label class="block text-gray-700">Nova lista</label>
         <input v-model="listName" type="text" class="w-full p-2 border rounded" required />
       </div>
-      <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Create List</button>
+      <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Criar lista</button>
     </form>
-    <h3 class="text-center text-xl font-bold mb-2">Your Lists</h3>
+    <h3 class="text-center text-xl font-bold mb-2">Suas listas</h3>
     <table class="w-1/2 mx-auto bg-white border rounded">
       <thead>
         <tr>
-          <th class="border px-4 py-2">List Name</th>
-          <th class="border px-4 py-2">Actions</th>
+          <th class="border px-4 py-2">Lista</th>
+          <th class="border px-4 py-2">Ações</th>
         </tr>
       </thead>
       <tbody>
@@ -37,14 +37,14 @@
     <!-- Edit List Modal -->
     <div v-if="showEditModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center">
       <div class="bg-white p-8 rounded shadow-md">
-        <h3 class="text-xl font-bold mb-4">Edit List Name</h3>
+        <h3 class="text-xl font-bold mb-4">Editar nome da lista</h3>
         <form @submit.prevent="updateList">
           <div class="mb-4">
-            <label class="block text-gray-700">New List Name</label>
+            <label class="block text-gray-700">Novo nome</label>
             <input v-model="editListName" type="text" class="w-full p-2 border rounded" required />
           </div>
-          <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Update List</button>
-          <button @click="showEditModal = false" class="w-full bg-gray-500 text-white p-2 rounded mt-2">Cancel</button>
+          <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Atualizar</button>
+          <button @click="showEditModal = false" class="w-full bg-gray-500 text-white p-2 rounded mt-2">Cancelar</button>
         </form>
       </div>
     </div>
@@ -52,9 +52,9 @@
     <!-- Delete Confirmation Modal -->
     <div v-if="showDeleteModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center">
       <div class="bg-white p-8 rounded shadow-md">
-        <h3 class="text-xl font-bold mb-4">Are you sure you want to delete this list?</h3>
-        <button @click="deleteList" class="w-full bg-red-500 text-white p-2 rounded">Delete</button>
-        <button @click="showDeleteModal = false" class="w-full bg-gray-500 text-white p-2 rounded mt-2">Cancel</button>
+          <h3 class="text-xl font-bold mb-4">Você deseja excluir esta lista?</h3>
+        <button @click="deleteList" class="w-full bg-red-500 text-white p-2 rounded">Excluir</button>
+        <button @click="showDeleteModal = false" class="w-full bg-gray-500 text-white p-2 rounded mt-2">Cancelar</button>
       </div>
     </div>
   </div>
