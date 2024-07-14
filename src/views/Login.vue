@@ -1,39 +1,24 @@
 <!-- frontend/src/views/Login.vue -->
 
 <template>
-    <div>
-      <h1>Login</h1>
+  <div class="max-w-md mx-auto bg-white p-8 rounded shadow-md">
+    <h2 class="text-2xl font-bold mb-4">Login</h2>
       <form @submit.prevent="login">
-        <div>
-          <label for="loginEmail">Email:</label>
-          <input type="email" id="loginEmail" v-model="loginEmail" required>
+        <div class="mb-4">
+          <label class="block text-gray-700">Email</label>
+        <input v-model="loginEmail" type="email" class="w-full p-2 border rounded" required />
+      </div>
+        <div class="mb-4">
+          <label class="block text-gray-700">Password</label>
+          <input v-model="loginPassword" type="password" class="w-full p-2 border rounded" required />
         </div>
-        <div>
-          <label for="loginPassword">Password:</label>
-          <input type="password" id="loginPassword" v-model="loginPassword" required>
-        </div>
-        <button type="submit">Login</button>
+        <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Login</button>
       </form>
-      
-      <h1>Create User</h1>
-      <form @submit.prevent="createUser">
-        <div>
-          <label for="registerUsername">Username:</label>
-          <input type="text" id="registerUsername" v-model="registerUsername" required>
-        </div>
-        <div>
-          <label for="registerEmail">Email:</label>
-          <input type="email" id="registerEmail" v-model="registerEmail" required>
-        </div>
-        <div>
-          <label for="registerPassword">Password:</label>
-          <input type="password" id="registerPassword" v-model="registerPassword" required>
-        </div>
-        <button type="submit">Create User</button>
-        <div v-if="registerMessage">{{ registerMessage }}</div>
-      </form>
+      <div class="mt-4 text-center">
+      <router-link to="/register" class="text-blue-500">Create an account</router-link>
     </div>
-  </template>
+  </div>
+</template>
   
   <script>
   import axios from 'axios'
@@ -42,11 +27,11 @@
     data() {
       return {
         loginEmail: '',
-        loginPassword: '',
-        registerUsername: '',
-        registerEmail: '',
-        registerPassword: '',
-        registerMessage: ''
+        loginPassword: ''
+        // registerUsername: '',
+        // registerEmail: '',
+        // registerPassword: '',
+        // registerMessage: ''
       }
     },
     methods: {
@@ -61,20 +46,20 @@
         } catch (error) {
           alert('Login failed: ' + error.response.data.message)
         }
-      },
-      async createUser() {
-        try {
-          const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/users`, {
-            username: this.registerUsername,
-            email: this.registerEmail,
-            password: this.registerPassword
-          })
-          this.registerMessage = 'User created successfully!'
-        } catch (error) {
-          this.registerMessage = 'User creation failed: ' + error.response.data.message
-        }
       }
+      // },
+      // async createUser() {
+      //   try {
+      //     const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/users`, {
+      //       username: this.registerUsername,
+      //       email: this.registerEmail,
+      //       password: this.registerPassword
+      //     })
+      //     this.registerMessage = 'User created successfully!'
+      //   } catch (error) {
+      //     this.registerMessage = 'User creation failed: ' + error.response.data.message
+      //   }
+      // }
     }
   }
   </script>
-  

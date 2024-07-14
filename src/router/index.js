@@ -2,11 +2,13 @@
 
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
 import ListManagement from '../views/ListManagement.vue'
 import ItemManagement from '../views/ItemManagement.vue'
 
 const routes = [
   { path: '/', name: 'Login', component: Login },
+  { path: '/register', name: 'Register', component: Register },
   { path: '/lists', name: 'ListManagement', component: ListManagement },
   { path: '/lists/:listId', name: 'ItemManagement', component: ItemManagement }
 ]
