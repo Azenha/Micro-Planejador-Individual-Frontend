@@ -1,8 +1,8 @@
 <!-- frontend/src/views/ItemManagement.vue -->
 <template>
   <div>
-    <h2 class="text-2xl font-bold mb-4">Item Management for {{ listName }}</h2>
-    <form @submit.prevent="createItem" class="mb-4">
+    <h2 class="text-center text-2xl font-bold mb-4">Item Management for {{ listName }}</h2>
+    <form @submit.prevent="createItem" class="max-w-md mx-auto bg-white p-8 rounded shadow-md mb-4">
       <div class="mb-4">
         <label class="block text-gray-700">Item Name</label>
         <input v-model="itemName" type="text" class="w-full p-2 border rounded" required />
@@ -21,11 +21,13 @@
       </div>
       <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Add Item</button>
     </form>
-    <h3 class="text-xl font-bold mb-2">Items in {{ listName }}</h3>
-    <table class="min-w-full bg-white border rounded">
+    <h3 class="text-center text-xl font-bold mb-2">Items in {{ listName }}</h3>
+    <table class="w-3/5 mx-auto bg-white border rounded">
       <thead>
         <tr>
-          <th class="border px-4 py-2">Purchased</th>
+          <th class="border px-4 py-2">
+              <ShoppingCartIcon class="h-5 w-5 inline-block" />
+            </th>
           <th class="border px-4 py-2">Name</th>
           <th class="border px-4 py-2">Quantity</th>
           <th class="border px-4 py-2">Unit</th>
@@ -35,20 +37,27 @@
       </thead>
       <tbody>
         <tr v-for="item in items" :key="item.id">
-          <td class="border px-4 py-2">
+          <td class="text-center border px-4 py-2">
             <input type="checkbox" v-model="item.completed" @change="toggleCompleted(item)" />
           </td>
-          <td class="border px-4 py-2">{{ item.description }}</td>
-          <td class="border px-4 py-2">{{ item.quantity }}</td>
-          <td class="border px-4 py-2">{{ item.unit }}</td>
-          <td class="border px-4 py-2">{{ item.value }}</td>
-          <td class="border px-4 py-2">
-            <button @click="editItem(item)" class="bg-yellow-500 text-white px-4 py-2 rounded mr-2">Edit</button>
-            <button @click="confirmDelete(item.id)" class="bg-red-500 text-white px-4 py-2 rounded">Delete</button>
+          <td class="text-center border px-4 py-2">{{ item.description }}</td>
+          <td class="text-center border px-4 py-2">{{ item.quantity }}</td>
+          <td class="text-center border px-4 py-2">{{ item.unit }}</td>
+          <td class="text-center border px-4 py-2">{{ item.value }}</td>
+          <td class="text-center border px-4 py-2">
+            <button @click="editItem(item)" class="bg-yellow-500 text-white px-4 py-2 rounded mr-2"><PencilSquareIcon class="h-5 w-5 inline-block" /></button>
+            <button @click="confirmDelete(item.id)" class="bg-red-500 text-white px-4 py-2 rounded"><TrashIcon class="h-5 w-5 inline-block" /></button>
           </td>
         </tr>
       </tbody>
     </table>
+
+    <!-- Back Button -->
+<div class="max-w-4xl mx-auto mt-4 flex justify-center">
+  <button @click="goBack" class="bg-gray-500 text-white px-4 py-2 rounded mx-auto flex items-center">
+    <ArrowUturnLeftIcon class="h-5 w-5 inline-block mr-2" /> Back
+  </button>
+</div>
 
     <!-- Edit Item Modal -->
     <div v-if="showEditModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center">
@@ -89,6 +98,7 @@
 </template>
 
 <script>
+import { ShoppingCartIcon, PencilSquareIcon, TrashIcon, ArrowUturnLeftIcon } from '@heroicons/vue/24/outline'
 import axios from 'axios'
 
 export default {
@@ -109,6 +119,12 @@ export default {
       showDeleteModal: false,
       deleteItemId: null
     }
+  },
+  components: {
+    ShoppingCartIcon,
+    PencilSquareIcon,
+    TrashIcon,
+    ArrowUturnLeftIcon
   },
   methods: {
     async fetchItems() {
@@ -201,8 +217,12 @@ export default {
       } catch (error) {
         alert('Failed to delete item')
       }
-    }
+    },
+    goBack() {
+      this.$router.go(-1)
+    },
   },
+
   async mounted() {
     try {
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/lists/${this.$route.params.listId}`, {

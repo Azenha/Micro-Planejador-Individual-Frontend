@@ -1,16 +1,16 @@
 <!-- frontend/src/views/ListManagement.vue -->
 <template>
   <div>
-    <h2 class="text-2xl font-bold mb-4">List Management</h2>
-    <form @submit.prevent="createList" class="mb-4">
+    <h2 class="text-center text-2xl font-bold mb-4">List Management</h2>
+    <form @submit.prevent="createList" class="max-w-md mx-auto bg-white p-8 rounded shadow-md mb-4">
       <div class="mb-4">
         <label class="block text-gray-700">List Name</label>
         <input v-model="listName" type="text" class="w-full p-2 border rounded" required />
       </div>
       <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Create List</button>
     </form>
-    <h3 class="text-xl font-bold mb-2">Your Lists</h3>
-    <table class="min-w-full bg-white border rounded">
+    <h3 class="text-center text-xl font-bold mb-2">Your Lists</h3>
+    <table class="w-1/2 mx-auto bg-white border rounded">
       <thead>
         <tr>
           <th class="border px-4 py-2">List Name</th>
@@ -19,15 +19,20 @@
       </thead>
       <tbody>
         <tr v-for="list in lists" :key="list.id">
-          <td class="border px-4 py-2">{{ list.name }}</td>
-          <td class="border px-4 py-2">
-            <button @click="goToItems(list.id)" class="bg-green-500 text-white px-4 py-2 rounded mr-2">Manage Items</button>
-            <button @click="editList(list)" class="bg-yellow-500 text-white px-4 py-2 rounded mr-2">Edit Name</button>
-            <button @click="confirmDelete(list.id)" class="bg-red-500 text-white px-4 py-2 rounded">Delete List</button>
+          <td class="text-center border px-4 py-2">{{ list.name }}</td>
+          <td class="text-center border px-4 py-2">
+            <button @click="goToItems(list.id)" class="bg-green-500 text-white px-4 py-2 rounded mr-2"><ShoppingCartIcon class="h-5 w-5 inline-block" /></button>
+            <button @click="editList(list)" class="bg-yellow-500 text-white px-4 py-2 rounded mr-2"><PencilSquareIcon class="h-5 w-5 inline-block" /></button>
+            <button @click="confirmDelete(list.id)" class="bg-red-500 text-white px-4 py-2 rounded"><TrashIcon class="h-5 w-5 inline-block" /></button>
           </td>
         </tr>
       </tbody>
     </table>
+
+    <!-- Logout Button -->
+    <div class="flex justify-center mt-4">
+      <button @click="logout" class="bg-red-500 text-white px-4 py-2 rounded"><ArrowUturnLeftIcon class="h-5 w-5 inline-block mr-2" /> Logout</button>
+    </div>
 
     <!-- Edit List Modal -->
     <div v-if="showEditModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center">
@@ -56,6 +61,7 @@
 </template>
 
 <script>
+import { ShoppingCartIcon, PencilSquareIcon, TrashIcon, ArrowUturnLeftIcon } from '@heroicons/vue/24/outline'
 import axios from 'axios'
 
 export default {
@@ -69,6 +75,12 @@ export default {
       showDeleteModal: false,
       deleteListId: null
     }
+  },
+  components: {
+    ShoppingCartIcon,
+    PencilSquareIcon,
+    TrashIcon,
+    ArrowUturnLeftIcon
   },
   methods: {
     async fetchLists() {
@@ -139,7 +151,14 @@ export default {
       } catch (error) {
         alert('Failed to delete list')
       }
-    }
+    },
+    logout() {
+      localStorage.removeItem('token')
+      this.$router.push('/').catch(err => {
+        console.error(err)
+        alert('Failed to navigate to login page')
+      })
+    },
   },
   mounted() {
     this.fetchLists()
