@@ -627,24 +627,16 @@ video {
   width: 100%;
 }
 
-.max-w-md {
-  max-width: 28rem;
-}
-
 .max-w-4xl {
   max-width: 56rem;
 }
 
+.max-w-md {
+  max-width: 28rem;
+}
+
 .flex-grow {
   flex-grow: 1;
-}
-
-.origin-center {
-  transform-origin: center;
-}
-
-.snap-center {
-  scroll-snap-align: center;
 }
 
 .flex-col {
@@ -730,10 +722,6 @@ video {
 
 .text-center {
   text-align: center;
-}
-
-.align-middle {
-  vertical-align: middle;
 }
 
 .text-2xl {
